@@ -34,6 +34,7 @@ class AuthController extends Controller
 
     }
 
+
     public function validatePhone(ValidatePhoneRequest $request)
     {
         //1 check for phone if exists: return exists
