@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services\DTO\User;
 
+use App\Http\Middleware\TrimStrings;
+use App\Models\User;
+
 /**
  * Class RegisterDTO
  * @package App\Services\DTO\User
  */
 class RegisterDTO
 {
+    /** @var User */
+    public $user;
+
     /** @var string */
     public $name;
 
@@ -43,5 +49,20 @@ class RegisterDTO
         $self->phone    = $array['phone'];
 
         return $self;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'surname'   => $this->surname,
+            'name'      => $this->name,
+            'type'      => $this->type,
+            'city_id'   => $this->cityId,
+            'password'  => $this->password,
+            'phone'     => $this->phone,
+        ];
     }
 }

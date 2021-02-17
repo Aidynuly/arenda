@@ -7,6 +7,7 @@ namespace App\Services\Traits;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use JsonSchema\Exception\ValidationException;
 
 trait RestExceptionHandler
 {
@@ -45,6 +46,9 @@ trait RestExceptionHandler
         switch (true) {
             case $this->isModelNotFoundException($e):
                 $retval = $this->modelNotFound();
+                break;
+            case $this->isValidatorException($e):
+                return $this->resp('Ошибка валидации', 422, $e->getMessage(), true);
                 break;
             case $e instanceof AuthenticationException:
                 return $this->resp('Тіркелмеген', 403, [], true);
@@ -103,5 +107,16 @@ trait RestExceptionHandler
     protected function isModelNotFoundException(\Throwable $e)
     {
         return $e instanceof ModelNotFoundException;
+    }
+
+    /**
+     * Determines if the given exception is an Eloquent model not found.
+     *
+     * @param \Throwable $e
+     * @return bool
+     */
+    protected function isValidatorException(\Throwable $e)
+    {
+        return $e instanceof ValidationException;
     }
 }

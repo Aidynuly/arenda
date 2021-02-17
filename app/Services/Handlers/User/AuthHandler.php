@@ -9,7 +9,7 @@ use App\Services\DTO\User\RegisterDTO;
 use Illuminate\Support\Str;
 
 /**
- * Class RegisterHandler
+ * Class RegisterUserHandler
  * @package App\Services\Handlers\User
  */
 class AuthHandler

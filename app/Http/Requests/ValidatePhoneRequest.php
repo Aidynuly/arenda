@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ValidatePhoneRequest extends FormRequest
 {
+    use CustomErrorMessage;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +27,7 @@ class ValidatePhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|unique:users,phone',
+            'phone' => 'required',
         ];
     }
 }

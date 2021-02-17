@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Services\DTO\User\RegisterDTO;
 use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AuthRequest
+ * Class VerifyCodeRequest
  * @package App\Http\Requests
  */
-class AuthRequest extends FormRequest
+class VerifyCodeRequest extends FormRequest
 {
     use CustomErrorMessage;
 
@@ -34,8 +33,8 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|exists:users,phone',
-            'password' => 'required',
+            'code'  => 'required',
+            'phone' => 'required',
         ];
     }
 }

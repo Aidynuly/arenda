@@ -6,10 +6,16 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterSellerRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\ValidatePhoneRequest;
+use App\Http\Requests\VerifyCodeRequest;
 use App\Http\Resources\UserResource;
-use App\Services\Handlers\User\RegisterHandler;
+use App\Services\DTO\ValidateAndSendCodeDTO;
+use App\Services\Handlers\User\RegisterSellerHandler;
+use App\Services\Handlers\User\RegisterUserHandler;
+use App\Services\Handlers\User\VerifyCodeHandler;
+use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 
@@ -18,14 +24,26 @@ class AuthController extends Controller
     use ResponseTrait;
 
     /**
-     * @param RegisterRequest $request
-     * @param RegisterHandler $handler
+     * @param RegisterUserRequest $request
+     * @param RegisterUserHandler $handler
      * @return JsonResponse
+     * @throws \App\Exceptions\NotVerifiedPhone
      */
-    public function register(RegisterRequest $request, RegisterHandler $handler): JsonResponse
+    public function registerUser(RegisterUserRequest $request, RegisterUserHandler $handler): JsonResponse
     {
         $user = $handler->handle($request->getDTO());
+        return $this->response('Успешная регистрация', new UserResource($user));
+    }
 
+    /**
+     * @param RegisterSellerRequest $request
+     * @param RegisterSellerHandler $handler
+     * @return JsonResponse
+     * @throws \App\Exceptions\NotVerifiedPhone
+     */
+    public function registerSeller(RegisterSellerRequest $request, RegisterSellerHandler $handler): JsonResponse
+    {
+        $user = $handler->handle($request->getDTO());
         return $this->response('Успешная регистрация', new UserResource($user));
     }
 
@@ -34,13 +52,27 @@ class AuthController extends Controller
 
     }
 
-
-    public function validatePhone(ValidatePhoneRequest $request)
+    /**
+     * @param ValidatePhoneRequest $request
+     * @param ValidateAndSendCodeHandler $handler
+     * @return JsonResponse
+     */
+    public function validatePhone(ValidatePhoneRequest $request, ValidateAndSendCodeHandler $handler): JsonResponse
     {
-        //1 check for phone if exists: return exists
-        //2 check for phone code existence if exists more than 10 > error
-        //3 generate code for sending
-        //4 send code
-        //5 return success response
+        $handler->handle(ValidateAndSendCodeDTO::fromArray([
+            'phone' => $request->get('phone'),
+        ]));
+        return $this->response('Смс отправлено успешно', true);
+    }
+
+    /**
+     * @param VerifyCodeRequest $request
+     * @param VerifyCodeHandler $handler
+     * @return JsonResponse
+     */
+    public function verifyCode(VerifyCodeRequest $request, VerifyCodeHandler $handler): JsonResponse
+    {
+        $result = $handler->handle($request->get('phone'), $request->get('code'));
+        return $this->response('Принято', $result);
     }
 }
