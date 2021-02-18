@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\DTO\User;
 
-use App\Http\Middleware\TrimStrings;
 use App\Models\User;
 
 /**
- * Class RegisterDTO
+ * Class RegisterSellerDTO
  * @package App\Services\DTO\User
  */
-class RegisterDTO
+class RegisterSellerDTO implements UserDtoInterface
 {
     /** @var User */
     public $user;
@@ -34,14 +33,18 @@ class RegisterDTO
     /** @var string */
     public $phone;
 
+    /** @var array */
+    public $houses;
+
     /**
      * @param array $array
-     * @return RegisterDTO
+     * @return RegisterSellerDTO
      */
-    public static function fromArray(array $array): RegisterDTO
+    public static function fromArray(array $array): RegisterSellerDTO
     {
         $self           = new static();
         $self->surname  = $array['surname'];
+        $self->houses   = $array['houses'];
         $self->name     = $array['name'];
         $self->type     = $array['type'];
         $self->cityId   = $array['city_id'];
@@ -63,6 +66,7 @@ class RegisterDTO
             'city_id'   => $this->cityId,
             'password'  => $this->password,
             'phone'     => $this->phone,
+            'houses'    => $this->houses,
         ];
     }
 }

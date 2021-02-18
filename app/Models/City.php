@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\City
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|City whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|City whereTitle($value)
  * @mixin \Illuminate\Database\Eloquent\Builder
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Region[] $regions
+ * @property-read int|null $regions_count
  */
 class City extends Model
 {
@@ -28,4 +31,12 @@ class City extends Model
     protected $casts = [
         'title' => 'string',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function regions(): HasMany
+    {
+        return $this->hasMany(Region::class, 'city_id');
+    }
 }

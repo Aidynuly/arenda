@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidatePhoneRequest extends FormRequest
+/**
+ * Class CreateOfferRequest
+ * @package App\Http\Requests
+ */
+class CreateOfferRequest extends FormRequest
 {
     use CustomErrorMessage;
 
@@ -27,7 +33,10 @@ class ValidatePhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required',
+            'region_id'     => 'required|exists:regions,id',
+            'price_from'    => 'required|numeric',
+            'price_to'      => 'required|numeric',
+            'rooms'         => 'required|int',
         ];
     }
 }

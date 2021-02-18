@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Services\DTO\User\RegisterDTO;
 use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,7 +20,7 @@ class AuthRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -31,7 +30,7 @@ class AuthRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'phone' => 'required|exists:users,phone',

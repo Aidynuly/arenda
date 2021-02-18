@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Services\DTO\User\RegisterDTO;
+use App\Services\DTO\User\RegisterUserDTO;
 use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,18 +28,18 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'phone' => 'required|unique:users,phone',
-            'city_id' => 'required|exists:cities,id',
-            'type' => 'required|in:user,seller',
-            'password' => 'required',
-            'surname' => 'required',
+            'name'      => 'required',
+            'phone'     => 'required|unique:users,phone',
+            'city_id'   => 'required|exists:cities,id',
+            'type'      => 'required|in:user,seller',
+            'password'  => 'required',
+            'surname'   => 'required',
         ];
     }
 
-    public function getDTO(): RegisterDTO
+    public function getDTO(): RegisterUserDTO
     {
-        return RegisterDTO::fromArray([
+        return RegisterUserDTO::fromArray([
             'name'      => $this->get('name'),
             'surname'   => $this->get('surname'),
             'city_id'   => $this->get('city_id'),

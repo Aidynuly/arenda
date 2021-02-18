@@ -22,7 +22,7 @@ class VerifyCodeHandler
      */
     public function handle(string $phone, string $code): bool
     {
-        $sms = SmsCode::wherePhone($phone)->whereCode($code)->first();
+        $sms = SmsCode::wherePhone($this->getNormalPhone($phone))->whereCode($code)->first();
 
         if ($sms) {
             $sms->update(['verified' => true]);

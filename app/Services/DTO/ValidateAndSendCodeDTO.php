@@ -28,8 +28,8 @@ class ValidateAndSendCodeDTO
     {
         $self = new static();
         $self->phone = $array['phone'];
-        $self->code = rand(0, 9).rand(0, 9).rand(0, 9).rand(0, 9);
-
+//        $self->code = rand(0, 9).rand(0, 9).rand(0, 9).rand(0, 9);
+        $self->code = '0000';
         return $self;
     }
 }

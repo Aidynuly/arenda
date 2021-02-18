@@ -11,6 +11,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\ValidatePhoneRequest;
 use App\Http\Requests\VerifyCodeRequest;
 use App\Http\Resources\UserResource;
+use App\Services\DTO\User\RegisterSellerDTO;
 use App\Services\DTO\ValidateAndSendCodeDTO;
 use App\Services\Handlers\User\RegisterSellerHandler;
 use App\Services\Handlers\User\RegisterUserHandler;
@@ -43,7 +44,7 @@ class AuthController extends Controller
      */
     public function registerSeller(RegisterSellerRequest $request, RegisterSellerHandler $handler): JsonResponse
     {
-        $user = $handler->handle($request->getDTO());
+        $user = $handler->handle(RegisterSellerDTO::fromArray($request->all()));
         return $this->response('Успешная регистрация', new UserResource($user));
     }
 

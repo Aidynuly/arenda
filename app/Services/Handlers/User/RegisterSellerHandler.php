@@ -6,7 +6,9 @@ namespace App\Services\Handlers\User;
 
 use App\Exceptions\NotVerifiedPhone;
 use App\Models\User;
-use App\Services\DTO\User\RegisterDTO;
+use App\Services\DTO\User\RegisterSellerDTO;
+use App\Services\Handlers\User\RegisterPipes\CreateHousesPipe;
+use App\Services\Handlers\User\RegisterPipes\SellerRegisterPipe;
 use App\Services\Handlers\User\RegisterPipes\ValidateRegisterPipe;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
@@ -29,16 +31,17 @@ class RegisterSellerHandler
     {
         return [
             ValidateRegisterPipe::class,
-            //UserRegisterPipe::class
+            SellerRegisterPipe::class,
+            CreateHousesPipe::class,
         ];
     }
 
     /**
-     * @param RegisterDTO $registerDTO
+     * @param RegisterSellerDTO $registerDTO
      * @return User
      * @throws NotVerifiedPhone
      */
-    public function handle(RegisterDTO $registerDTO): User
+    public function handle(RegisterSellerDTO $registerDTO): User
     {
         DB::transaction(function () use ($registerDTO) {
             $this->pipeline

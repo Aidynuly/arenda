@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Services\DTO\User\RegisterDTO;
+use App\Services\DTO\User\RegisterSellerDTO;
 use App\Services\Traits\CustomErrorMessage;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,24 +28,33 @@ class RegisterSellerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'phone' => 'required|unique:users,phone',
-            'city_id' => 'required|exists:cities,id',
-            'type' => 'required|in:user,seller',
-            'password' => 'required',
-            'surname' => 'required',
+            'name'                  => 'required',
+            'phone'                 => 'required|unique:users,phone',
+            'city_id'               => 'required|exists:cities,id',
+            'type'                  => 'required|in:user,seller',
+            'password'              => 'required',
+            'surname'               => 'required',
+            'houses'                => 'array',
+            'houses.region_id'      => 'exists:regions,id',
+            'houses.area'           => 'float',
+            'houses.rooms'          => 'numeric',
+            'houses.address'        => 'min:1',
+            'houses.description'    => 'min:1',
+            'houses.images'         => 'array',
+            'houses.images.*'       => 'file',
         ];
     }
 
-    public function getDTO(): RegisterDTO
+    public function getDTO(): RegisterSellerDTO
     {
-        return RegisterDTO::fromArray([
+        return RegisterSellerDTO::fromArray([
             'name'      => $this->get('name'),
             'surname'   => $this->get('surname'),
             'city_id'   => $this->get('city_id'),
             'type'      => $this->get('type'),
             'password'  => $this->get('password'),
             'phone'     => $this->get('phone'),
+            'houses'    => $this->get('houses'),
         ]);
     }
 }

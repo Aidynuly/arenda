@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Handlers\User;
 
 use App\Models\User;
-use App\Services\DTO\User\RegisterDTO;
+use App\Services\DTO\User\RegisterUserDTO;
 use Illuminate\Support\Str;
 
 /**

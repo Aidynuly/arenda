@@ -45,7 +45,7 @@ class House extends Model
 
     protected $casts = [
         'id' => 'int',
-        'user_int' => 'int',
+        'user_id' => 'int',
         'region_id' => 'int',
         'area' => 'float',
         'rooms' => 'int',

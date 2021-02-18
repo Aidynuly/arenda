@@ -6,7 +6,7 @@ namespace App\Services\Handlers\User;
 
 use App\Exceptions\NotVerifiedPhone;
 use App\Models\User;
-use App\Services\DTO\User\RegisterDTO;
+use App\Services\DTO\User\RegisterUserDTO;
 use App\Services\Handlers\User\RegisterPipes\UserRegisterPipe;
 use App\Services\Handlers\User\RegisterPipes\ValidateRegisterPipe;
 use Illuminate\Pipeline\Pipeline;
@@ -35,11 +35,11 @@ class RegisterUserHandler
     }
 
     /**
-     * @param RegisterDTO $registerDTO
+     * @param RegisterUserDTO $registerDTO
      * @return User
      * @throws NotVerifiedPhone
      */
-    public function handle(RegisterDTO $registerDTO): User
+    public function handle(RegisterUserDTO $registerDTO): User
     {
         DB::transaction(function () use ($registerDTO) {
             $this->pipeline
