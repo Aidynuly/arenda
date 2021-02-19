@@ -33,6 +33,7 @@ class HouseResource extends JsonResource
             'area'          => $this->area,
             'address'       => $this->address,
             'city'          => new CityResource($this->region->city),
+            'reviews'       => ReviewResource::collection($this->reviews)
         ];
     }
 }

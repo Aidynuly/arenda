@@ -40,6 +40,18 @@ class OfferStatus extends Model
 {
     use HasFactory;
 
+    public const STATUS_ACCEPTED = 'accepted';
+    public const STATUS_DECLINED = 'declined';
+    public const STATUS_DONE = 'done';
+    public const STATUS_DELETED = 'deleted';
+
+    public const STATUSES = [
+        self::STATUS_ACCEPTED,
+        self::STATUS_DECLINED,
+        self::STATUS_DONE,
+        self::STATUS_DELETED,
+    ];
+
     protected $fillable = ['user_id', 'status', 'offer_id', 'price', 'house_id',];
 
     protected $casts = [
@@ -57,13 +69,5 @@ class OfferStatus extends Model
     public function house(): BelongsTo
     {
         return $this->belongsTo(House::class, 'house_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class, 'house_id');
     }
 }

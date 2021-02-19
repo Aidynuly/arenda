@@ -6,11 +6,14 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOfferRequest;
+use App\Http\Requests\CreateOfferStatusRequest;
 use App\Http\Resources\OfferResource;
 use App\Http\Resources\OfferStatusesResource;
+use App\Http\Resources\OfferStatusesSellerResource;
 use App\Models\Offer;
 use App\Services\DTO\OfferDTO;
 use App\Services\Handlers\Offers\CreateOfferHandler;
+use App\Services\Handlers\Offers\CreateOfferStatusHandler;
 use App\Services\Handlers\Offers\GetOffersByUserHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -60,5 +63,16 @@ class OfferController extends Controller
     public function getOfferStatusesById(Offer $offer): JsonResponse
     {
         return $this->response('Мои отклики', new OfferStatusesResource($offer));
+    }
+
+    /**
+     * @param CreateOfferStatusRequest $request
+     * @param CreateOfferStatusHandler $handler
+     * @return JsonResponse
+     */
+    public function createOfferStatus(CreateOfferStatusRequest  $request, CreateOfferStatusHandler $handler): JsonResponse
+    {
+        $offerStatus = $handler->handle($request->getDTO());
+        return $this->response('Мои отклики', new OfferStatusesSellerResource($offerStatus));
     }
 }

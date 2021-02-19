@@ -45,6 +45,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Region $region
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HouseImage[] $images
  * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
+ * @property-read int|null $reviews_count
  */
 class House extends Model
 {
@@ -77,5 +79,13 @@ class House extends Model
     public function images(): HasMany
     {
         return $this->hasMany(HouseImage::class, 'house_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'house_id');
     }
 }

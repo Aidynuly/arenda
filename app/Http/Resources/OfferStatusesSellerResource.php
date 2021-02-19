@@ -28,7 +28,6 @@ class OfferStatusesSellerResource extends JsonResource
             'status'    => $this->status,
             'price'     => $this->price,
             'house'     => new HouseResource($this->house),
-            'reviews'   => ReviewResource::collection($this->reviews),
         ];
     }
 }
