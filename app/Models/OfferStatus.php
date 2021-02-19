@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\OfferStatus
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|OfferStatus whereHouseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OfferStatus wherePrice($value)
  * @property-read \App\Models\House $house
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
+ * @property-read int|null $reviews_count
  */
 class OfferStatus extends Model
 {
@@ -48,8 +51,19 @@ class OfferStatus extends Model
         'house_id'  => 'int',
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function house(): BelongsTo
     {
         return $this->belongsTo(House::class, 'house_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'house_id');
     }
 }
