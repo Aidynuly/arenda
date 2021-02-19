@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\V1;
 
+use App\Exceptions\AlreadyHasOfferStatusException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOfferRequest;
 use App\Http\Requests\CreateOfferStatusRequest;
@@ -69,6 +70,7 @@ class OfferController extends Controller
      * @param CreateOfferStatusRequest $request
      * @param CreateOfferStatusHandler $handler
      * @return JsonResponse
+     * @throws AlreadyHasOfferStatusException
      */
     public function createOfferStatus(CreateOfferStatusRequest  $request, CreateOfferStatusHandler $handler): JsonResponse
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\V1;
 
+use App\Exceptions\AlreadyHasReviewException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateReviewRequest;
 use App\Http\Resources\ReviewResource;
@@ -24,6 +25,7 @@ class ReviewController extends Controller
      * @param CreateReviewRequest $request
      * @param CreateReviewHandler $handler
      * @return JsonResponse
+     * @throws AlreadyHasReviewException
      */
     public function createReview(CreateReviewRequest $request, CreateReviewHandler $handler): JsonResponse
     {
