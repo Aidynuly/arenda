@@ -34,6 +34,6 @@ class ReviewController extends Controller
            'house_id'   => $request->get('house_id'),
        ]));
 
-       return $this->response('Отзывы', new ReviewResource($review));
+       return $this->response('Отзыв оставлен успешно', new ReviewResource($review));
     }
 }

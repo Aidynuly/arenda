@@ -25,7 +25,7 @@ class ReviewDTO
         $self = new static();
         $self->user     = $array['user'];
         $self->text     = $array['text'];
-        $self->star     = $array['start'];
+        $self->star     = $array['star'];
         $self->houseId  = $array['house_id'];
 
         return $self;
