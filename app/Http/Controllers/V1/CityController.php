@@ -7,9 +7,8 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
 use App\Models\City;
-use App\Models\Region;
 use App\Services\Traits\ResponseTrait;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Class CityController
@@ -20,9 +19,9 @@ class CityController extends Controller
     use ResponseTrait;
 
     /**
-     * @return mixed
+     * @return JsonResponse
      */
-    public function cities()
+    public function cities(): JsonResponse
     {
         $cities = City::orderBy('title')->get();
         return $this->response('Города', CityResource::collection($cities));

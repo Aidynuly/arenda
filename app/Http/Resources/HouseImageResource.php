@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Models\City;
-use App\Models\Region;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\HouseImage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class RegionResource
+ * Class HouseImageResource
  * @package App\Http\Resources
- * @mixin Region
+ * @mixin HouseImage
  */
-class RegionResource extends JsonResource
+class HouseImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,8 +23,8 @@ class RegionResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'    => $this->id,
-            'title' => $this->title,
+            'id'        => $this->id,
+            'image_url' => $this->image_url,
         ];
     }
 }

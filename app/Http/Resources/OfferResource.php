@@ -28,7 +28,7 @@ class OfferResource extends JsonResource
             'to_price'      => $this->to_price,
             'rooms'         => $this->rooms,
             'city'          => new CityResource($this->city),
-            'offers'        => count($this->offerStatuses)
+            'offers'        => count($this->offerStatuses),
         ];
     }
 }

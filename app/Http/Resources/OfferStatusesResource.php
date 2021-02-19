@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Models\City;
-use App\Models\Region;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Offer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class RegionResource
+ * Class OfferStatusesResource
  * @package App\Http\Resources
- * @mixin Region
+ * @mixin Offer
  */
-class RegionResource extends JsonResource
+class OfferStatusesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,11 +20,11 @@ class RegionResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request): array
+    public function toArray($request)
     {
         return [
-            'id'    => $this->id,
-            'title' => $this->title,
+            'id' => $this->id,
+            'offer_statuses' => OfferStatusesSellerResource::collection($this->offerStatuses)
         ];
     }
 }

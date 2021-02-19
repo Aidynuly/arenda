@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,6 +41,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Illuminate\Database\Eloquent\Builder
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\House[] $houses
+ * @property-read int|null $houses_count
  */
 class User extends Authenticatable
 {
@@ -82,4 +85,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function houses(): HasMany
+    {
+        return $this->hasMany(House::class, 'user_id');
+    }
 }

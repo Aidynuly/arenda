@@ -6,6 +6,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\House
@@ -36,10 +39,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|House whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|House whereUserId($value)
  * @mixin \Illuminate\Database\Eloquent\Builder
+ * @method static \Illuminate\Database\Query\Builder|House onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|House withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|House withoutTrashed()
+ * @property-read \App\Models\Region $region
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HouseImage[] $images
+ * @property-read int|null $images_count
  */
 class House extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['description', 'user_id', 'region_id', 'area', 'rooms', 'is_active', 'address'];
 
@@ -53,4 +62,20 @@ class House extends Model
         'address' => 'string',
         'description' => 'string',
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class, 'region_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(HouseImage::class, 'house_id');
+    }
 }

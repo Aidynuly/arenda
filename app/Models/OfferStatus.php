@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\OfferStatus
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $price
  * @method static \Illuminate\Database\Eloquent\Builder|OfferStatus whereHouseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OfferStatus wherePrice($value)
+ * @property-read \App\Models\House $house
  */
 class OfferStatus extends Model
 {
@@ -45,4 +47,9 @@ class OfferStatus extends Model
         'price'     => 'string',
         'house_id'  => 'int',
     ];
+
+    public function house(): BelongsTo
+    {
+        return $this->belongsTo(House::class, 'house_id');
+    }
 }
