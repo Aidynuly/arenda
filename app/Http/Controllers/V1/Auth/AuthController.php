@@ -20,6 +20,10 @@ use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class AuthController
+ * @package App\Http\Controllers\V1\Auth
+ */
 class AuthController extends Controller
 {
     use ResponseTrait;

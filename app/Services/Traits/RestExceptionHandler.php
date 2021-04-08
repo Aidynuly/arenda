@@ -18,7 +18,7 @@ trait RestExceptionHandler
             'message' => $message,
             'error' => $error,
             'data' => $data
-        ], 200);
+        ], $statusCode);
     }
 
     /**
