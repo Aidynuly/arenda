@@ -40,7 +40,7 @@ class ValidateRegisterPipe
         $user = User::wherePhone($this->getNormalPhone($registerDTO->phone))->exists();
 
         if ($user) {
-             throw new UserAlreadyExistsException();
+             throw new UserAlreadyExistsException('Пользователь уже существует');
         }
 
         return $next($registerDTO);

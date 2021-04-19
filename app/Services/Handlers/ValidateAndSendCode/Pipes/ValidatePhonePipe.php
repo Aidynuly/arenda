@@ -23,7 +23,7 @@ class ValidatePhonePipe
         $user = User::wherePhone($this->getNormalPhone($dto->phone))->exists();
 
         if ($user) {
-            throw UserAlreadyExistsException::exists($dto->phone);
+            throw new UserAlreadyExistsException('Пользователь уже существует');
         }
 
         return $next($dto);
