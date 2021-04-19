@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use App\Exceptions\Messages\Constant;
 use Exception;
 
 /**
  * Class UserAlreadyExistsException
  * @package App\Exceptions
  */
-class UserAlreadyExistsException extends Exception
+class UserAlreadyExistsException extends Exception implements DevMessageErrorInterface
 {
+    protected $devMessage = Constant::USER_ALREADY_EXISTS;
+
     /**
-     * @param string $phone
-     * @return static
+     * @return string
      */
-    public static function exists(string $phone): self
+    public function getDevMessage(): String
     {
-        return new static('Такой номер телефона уже существует '.$phone);
+        return $this->devMessage;
     }
 }

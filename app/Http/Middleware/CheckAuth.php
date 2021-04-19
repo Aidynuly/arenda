@@ -23,12 +23,12 @@ class CheckAuth
     {
         $token = $request->header('token');
         if (empty($token)) {
-            throw new NotAuthorizedException('Вы не авторизованы', 401);
+            throw new NotAuthorizedException('Вы не авторизованы');
         }
 
         $user = User::whereToken($token)->first();
         if (!$user) {
-            throw new InCorrectTokenException('Не правильный токен', 404);
+            throw new InCorrectTokenException('Не правильный токен');
         }
 
         $request->attributes->add(['user' => $user]);

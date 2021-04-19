@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use App\Exceptions\Messages\Constant;
 use Exception;
 
 /**
  * Class SendCodeException
  * @package App\Exceptions
  */
-class SendCodeException extends Exception
+class SendCodeException extends Exception implements DevMessageErrorInterface
 {
+   protected $devMessage = Constant::SEND_CODE_EXCEPTION;
+
     /**
-     * @return static
+     * @return string
      */
-    public static function errorSend(): SendCodeException
+    public function getDevMessage(): String
     {
-        return new static('Ошибка при отправке смс. Повторите еще');
+        return $this->devMessage;
     }
 }

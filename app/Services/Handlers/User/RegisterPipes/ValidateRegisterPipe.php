@@ -34,13 +34,13 @@ class ValidateRegisterPipe
             ->exists();
 
         if (!$sms) {
-            throw new NotVerifiedPhone('Телефон все еще не проверен');
+            throw new NotVerifiedPhone('Телефон не прошел проверку');
         }
 
         $user = User::wherePhone($this->getNormalPhone($registerDTO->phone))->exists();
 
         if ($user) {
-             throw new UserAlreadyExistsException('Пользователь уже существует');
+             throw new UserAlreadyExistsException();
         }
 
         return $next($registerDTO);
