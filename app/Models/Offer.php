@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\City $city
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OfferStatus[] $offerStatuses
  * @property-read int|null $offer_statuses_count
+ * @property-read \App\Models\Region $region
  */
 class Offer extends Model
 {
@@ -45,9 +46,9 @@ class Offer extends Model
     /**
      * @return BelongsTo
      */
-    public function city(): BelongsTo
+    public function region(): BelongsTo
     {
-        return $this->belongsTo(City::class, 'region_id');
+        return $this->belongsTo(Region::class, 'region_id');
     }
 
     /**
