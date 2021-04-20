@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\ReviewDateCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,9 +38,10 @@ class Review extends Model
     protected $fillable = ['user_id', 'house_id', 'text', 'star'];
 
     protected $casts = [
-        'user_id'   => 'int',
-        'house_id'  => 'int',
-        'text'      => 'string',
-        'star'      => 'float',
+        'user_id'       => 'int',
+        'house_id'      => 'int',
+        'text'          => 'string',
+        'star'          => 'float',
+        'created_at'    => ReviewDateCast::class,
     ];
 }

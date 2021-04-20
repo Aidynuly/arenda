@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
+use App\Casts\ReviewDateCast;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -27,6 +28,7 @@ class ReviewResource extends JsonResource
             'id'    => $this->id,
             'text'  => $this->text,
             'star'  => $this->star,
+            'date'  => $this->created_at,
         ];
     }
 }
