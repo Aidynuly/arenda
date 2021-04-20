@@ -29,6 +29,8 @@ class OfferController extends Controller
     use ResponseTrait;
 
     /**
+     * User's request
+     *
      * @param CreateOfferRequest $request
      * @param CreateOfferHandler $handler
      * @return JsonResponse
@@ -47,6 +49,8 @@ class OfferController extends Controller
     }
 
     /**
+     * User's request
+     *
      * @param Request $request
      * @param GetOffersByUserHandler $handler
      * @return JsonResponse
@@ -58,6 +62,8 @@ class OfferController extends Controller
     }
 
     /**
+     * User's request, by offer get all houses
+     *
      * @param Offer $offer
      * @return JsonResponse
      */
