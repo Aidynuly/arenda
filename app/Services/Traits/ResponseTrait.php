@@ -20,6 +20,7 @@ trait ResponseTrait
         return response()->json([
             'error_code'    =>  $errorCode,
             'status'        =>  $status,
+            'dev_message'   =>  null,
             'message'       =>  $message,
             'data'          =>  $data
         ]);

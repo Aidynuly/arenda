@@ -25,7 +25,7 @@ class CreateOfferStatusHandler
         $this->validate($offerStatusDTO->user, (int)$offerStatusDTO->offerId);
 
         return OfferStatus::create(
-            $offerStatusDTO->toArray() + ['status' => OfferStatus::STATUS_ACCEPTED]
+            $offerStatusDTO->toArray() + ['status' => OfferStatus::STATUS_ACTIVE]
         );
     }
 

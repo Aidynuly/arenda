@@ -40,6 +40,7 @@ class OfferStatus extends Model
 {
     use HasFactory;
 
+    public const STATUS_ACTIVE = 'active';
     public const STATUS_ACCEPTED = 'accepted';
     public const STATUS_DECLINED = 'declined';
     public const STATUS_DONE = 'done';
@@ -50,6 +51,7 @@ class OfferStatus extends Model
         self::STATUS_DECLINED,
         self::STATUS_DONE,
         self::STATUS_DELETED,
+        self::STATUS_ACTIVE,
     ];
 
     protected $fillable = ['user_id', 'status', 'offer_id', 'price', 'house_id',];

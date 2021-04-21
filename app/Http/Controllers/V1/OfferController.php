@@ -9,12 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOfferRequest;
 use App\Http\Requests\CreateOfferStatusRequest;
 use App\Http\Resources\OfferResource;
-use App\Http\Resources\OfferStatusesResource;
 use App\Http\Resources\OfferStatusesSellerResource;
 use App\Models\Offer;
+use App\Models\OfferStatus;
 use App\Services\DTO\OfferDTO;
 use App\Services\Handlers\Offers\CreateOfferHandler;
 use App\Services\Handlers\Offers\CreateOfferStatusHandler;
+use App\Services\Handlers\Offers\GetActiveOfferStatusesHandler;
 use App\Services\Handlers\Offers\GetOffersByUserHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -62,14 +63,46 @@ class OfferController extends Controller
     }
 
     /**
-     * User's request, by offer get all houses
+     * Список квартир юзера, только активные.
+     *
+     * @param Offer $offer
+     * @param GetActiveOfferStatusesHandler $handler
+     * @return JsonResponse
+     */
+    public function getOfferStatusesById(Offer $offer, GetActiveOfferStatusesHandler $handler): JsonResponse
+    {
+        $offerStatuses = $handler->handle($offer);
+        return $this->response('Мои отклики', OfferStatusesSellerResource::collection($offerStatuses));
+    }
+
+    /**
+     * Отклонить квартиру user.
      *
      * @param Offer $offer
      * @return JsonResponse
      */
-    public function getOfferStatusesById(Offer $offer): JsonResponse
+    public function declineOffer(Offer $offer): JsonResponse
     {
-        return $this->response('Мои отклики', new OfferStatusesResource($offer));
+        $offer->offerStatuses()->update([
+            'status' => OfferStatus::STATUS_DECLINED,
+        ]);
+
+        return $this->response('Успешно отклонен');
+    }
+
+    /**
+     * Принять квартиру user.
+     *
+     * @param Offer $offer
+     * @return JsonResponse
+     */
+    public function acceptOffer(Offer $offer): JsonResponse
+    {
+        $offer->offerStatuses()->update([
+            'status' => OfferStatus::STATUS_ACCEPTED,
+        ]);
+
+        return $this->response('Успешно принят');
     }
 
     /**

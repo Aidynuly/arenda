@@ -29,7 +29,11 @@ class HouseResource extends JsonResource
             'rooms'         => $this->rooms,
             'is_active'     => $this->is_active,
             'images'        => HouseImageResource::collection($this->images),
-            'user_id'       => $this->user_id,
+            'user'          => [
+                'user_id'       => $this->user_id,
+                'phone'         => $this->user->phone,
+                'name'          => $this->user->name,
+            ],
             'area'          => $this->area,
             'address'       => $this->address,
             'region'        => new RegionResource($this->region),

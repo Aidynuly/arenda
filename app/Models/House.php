@@ -47,6 +47,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $images_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
  * @property-read int|null $reviews_count
+ * @property-read \App\Models\User $user
  */
 class House extends Model
 {
@@ -71,6 +72,14 @@ class House extends Model
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class, 'region_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
