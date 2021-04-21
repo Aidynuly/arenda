@@ -19,7 +19,9 @@ class GetOffersByUserHandler
      */
     public function handle(User $user)
     {
-        $offers = Offer::whereUserId($user->id)->get();
+        $offers = Offer::whereUserId($user->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return $offers;
     }
