@@ -19,6 +19,7 @@ use App\Services\Handlers\User\VerifyCodeHandler;
 use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 
@@ -84,10 +85,12 @@ class AuthController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return JsonResponse
      */
-    public function getProfile(): JsonResponse
+    public function getProfile(Request $request): JsonResponse
     {
-        return $this->response('Профиль', Auth::user());
+        $user = $request->get('user');
+        return $this->response('Профиль', new UserResource($user));
     }
 }
