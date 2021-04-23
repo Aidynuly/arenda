@@ -18,12 +18,10 @@ use App\Services\Handlers\User\RegisterSellerHandler;
 use App\Services\Handlers\User\RegisterUserHandler;
 use App\Services\Handlers\User\VerifyCodeHandler;
 use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
+use App\Services\Traits\ConstructionHelper;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
-use Psy\Util\Json;
 
 /**
  * Class AuthController
@@ -31,7 +29,7 @@ use Psy\Util\Json;
  */
 class AuthController extends Controller
 {
-    use ResponseTrait;
+    use ResponseTrait, ConstructionHelper;
 
     /**
      * @param RegisterUserRequest $request
@@ -63,7 +61,7 @@ class AuthController extends Controller
      */
     public function auth(AuthRequest $request): JsonResponse
     {
-        $user = User::wherePhone($request->get('phone'))
+        $user = User::wherePhone($this->getNormalPhone($request->get('phone')))
             ->wherePassword($request->get('password'))
             ->firstOrFail();
 
