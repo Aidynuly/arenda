@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use App\Models\Offer;
+use App\Models\OfferStatus;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -28,7 +29,7 @@ class OfferResource extends JsonResource
             'to_price'      => $this->to_price,
             'rooms'         => $this->rooms,
             'region'        => new RegionResource($this->region),
-            'offers'        => count($this->offerStatuses),
+            'offers'        => count($this->offerStatuses->whereNotIn('status', [OfferStatus::STATUS_DECLINED, OfferStatus::STATUS_DELETED],)),
         ];
     }
 }

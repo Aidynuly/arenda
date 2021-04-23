@@ -14,7 +14,7 @@ class AlterTableOfferStatusesAddStatus extends Migration
     public function up()
     {
         Schema::table('offer_statuses', function (Blueprint $table) {
-            $table->set('status', ['accepted', 'declined', 'done', 'deleted', 'active']);
+            $table->enum('status', ['accepted', 'declined', 'done', 'deleted', 'active']);
         });
     }
 
@@ -25,6 +25,8 @@ class AlterTableOfferStatusesAddStatus extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('offer_statuses', function (Blueprint $table) {
+            $table->dropColumn('enum');
+        });
     }
 }

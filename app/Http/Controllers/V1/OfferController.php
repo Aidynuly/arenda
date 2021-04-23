@@ -78,12 +78,12 @@ class OfferController extends Controller
     /**
      * Отклонить квартиру user.
      *
-     * @param Offer $offer
+     * @param OfferStatus $offerStatus
      * @return JsonResponse
      */
-    public function declineOffer(Offer $offer): JsonResponse
+    public function declineOffer(OfferStatus $offerStatus): JsonResponse
     {
-        $offer->offerStatuses()->update([
+        $offerStatus->update([
             'status' => OfferStatus::STATUS_DECLINED,
         ]);
 
@@ -93,16 +93,31 @@ class OfferController extends Controller
     /**
      * Принять квартиру user.
      *
-     * @param Offer $offer
+     * @param OfferStatus $offerStatus
      * @return JsonResponse
      */
-    public function acceptOffer(Offer $offer): JsonResponse
+    public function acceptOffer(OfferStatus $offerStatus): JsonResponse
     {
-        $offer->offerStatuses()->update([
+        $offerStatus->update([
             'status' => OfferStatus::STATUS_ACCEPTED,
         ]);
 
         return $this->response('Успешно принят');
+    }
+
+    /**
+     * Завершить оффер user.
+     *
+     * @param OfferStatus $offerStatus
+     * @return JsonResponse
+     */
+    public function doneOffer(OfferStatus $offerStatus): JsonResponse
+    {
+        $offerStatus->update([
+            'status' => OfferStatus::STATUS_DONE,
+        ]);
+
+        return $this->response('Успешно завершен');
     }
 
     /**

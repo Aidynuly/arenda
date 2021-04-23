@@ -19,6 +19,8 @@ use App\Services\Handlers\User\VerifyCodeHandler;
 use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Psy\Util\Json;
 
 /**
  * Class AuthController
@@ -79,5 +81,13 @@ class AuthController extends Controller
     {
         $result = $handler->handle($request->get('phone'), $request->get('code'));
         return $this->response('Принято', $result);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getProfile(): JsonResponse
+    {
+        return $this->response('Профиль', Auth::user());
     }
 }
