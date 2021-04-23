@@ -11,6 +11,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\ValidatePhoneRequest;
 use App\Http\Requests\VerifyCodeRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Services\DTO\User\RegisterSellerDTO;
 use App\Services\DTO\ValidateAndSendCodeDTO;
 use App\Services\Handlers\User\RegisterSellerHandler;
@@ -20,6 +21,7 @@ use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 
@@ -55,9 +57,17 @@ class AuthController extends Controller
         return $this->response('Успешная регистрация', new UserResource($user));
     }
 
-    public function auth(AuthRequest $request)
+    /**
+     * @param AuthRequest $request
+     * @return JsonResponse
+     */
+    public function auth(AuthRequest $request): JsonResponse
     {
+        $user = User::wherePhone($request->get('phone'))
+            ->wherePassword($request->get('password'))
+            ->firstOrFail();
 
+        return $this->response('Успешная авторизация', new UserResource($user));
     }
 
     /**
