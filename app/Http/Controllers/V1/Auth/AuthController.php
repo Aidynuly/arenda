@@ -6,6 +6,7 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
+use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\RegisterSellerRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\ValidatePhoneRequest;
@@ -14,6 +15,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\DTO\User\RegisterSellerDTO;
 use App\Services\DTO\ValidateAndSendCodeDTO;
+use App\Services\Handlers\User\EditProfileHandler;
 use App\Services\Handlers\User\RegisterSellerHandler;
 use App\Services\Handlers\User\RegisterUserHandler;
 use App\Services\Handlers\User\VerifyCodeHandler;
@@ -100,5 +102,16 @@ class AuthController extends Controller
     {
         $user = $request->get('user');
         return $this->response('Профиль', new UserResource($user));
+    }
+
+    /**
+     * @param EditProfileRequest $request
+     * @param EditProfileHandler $handler
+     * @return JsonResponse
+     */
+    public function editProfile(EditProfileRequest $request, EditProfileHandler $handler): JsonResponse
+    {
+        $user = $handler->handle($request->get('user'), $request->validated());
+        return $this->response('Успешно изменен', new UserResource($user));
     }
 }

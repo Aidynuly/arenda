@@ -29,5 +29,6 @@ Route::prefix('v1')->group(function() {
 
         Route::post('reviews/create', [ReviewController::class, 'createReview']);
         Route::get('profile', [AuthController::class, 'getProfile']);
+        Route::post('profile/edit', [AuthController::class, 'editProfile']);
     });
 });
