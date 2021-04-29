@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Sms;
 
+/**
+ * Class SmsService
+ * @package App\Services\Sms
+ */
 class SmsService implements SmsInterface
 {
     /**
