@@ -8,6 +8,8 @@ use App\Models\House;
 use App\Models\HouseImage;
 use App\Services\DTO\User\RegisterSellerDTO;
 use App\Services\Traits\ImageUploadTrait;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class CreateHousesPipe

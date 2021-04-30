@@ -16,7 +16,7 @@ trait ImageUploadTrait
      * @param UploadedFile $image
      * @return String
      */
-    public function uploadImage(UploadedFile $image): String
+    public function uploadImage(UploadedFile  $image): String
     {
         $fileName = time().'.'.$image->extension();
         $image->move(public_path('uploads'), $fileName);
