@@ -7,7 +7,6 @@ namespace App\Http\Resources;
 use App\Models\House;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
 /**
  * Class HouseResource
  * @package App\Http\Resources

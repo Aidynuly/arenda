@@ -24,7 +24,7 @@ class HouseImageResource extends JsonResource
     {
         return [
             'id'        => $this->id,
-            'image_url' => $this->image_url,
+            'image_url' => url(public_path('uploads').$this->image_url),
         ];
     }
 }

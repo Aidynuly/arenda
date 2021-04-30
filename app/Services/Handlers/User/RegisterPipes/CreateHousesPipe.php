@@ -7,6 +7,7 @@ namespace App\Services\Handlers\User\RegisterPipes;
 use App\Models\House;
 use App\Models\HouseImage;
 use App\Services\DTO\User\RegisterSellerDTO;
+use App\Services\Traits\ImageUploadTrait;
 
 /**
  * Class CreateHousesPipe
@@ -14,6 +15,8 @@ use App\Services\DTO\User\RegisterSellerDTO;
  */
 class CreateHousesPipe
 {
+    use ImageUploadTrait;
+
     /**
      * @param RegisterSellerDTO $registerSellerDTO
      * @param \Closure $next
@@ -24,21 +27,20 @@ class CreateHousesPipe
         if (! empty($registerSellerDTO->houses)) {
             foreach ($registerSellerDTO->houses as $house) {
                 $createdHouse = House::create([
-                    'user_id' => $registerSellerDTO->user->id,
-                    'description' => $house['description'],
-                    'region_id' => $house['region_id'],
-                    'area' => $house['area'],
-                    'rooms' => $house['rooms'],
-                    'address' => $house['address'],
+                    'user_id'       => $registerSellerDTO->user->id,
+                    'description'   => $house['description'],
+                    'region_id'     => $house['region_id'],
+                    'area'          => $house['area'],
+                    'rooms'         => $house['rooms'],
+                    'address'       => $house['address'],
                 ]);
-
-                foreach ($house['images'] as $image) {
-                    //Todo download image and save it
-
-                    HouseImage::create([
-                        'house_id'  => $createdHouse->id,
-                        'image_url' => 'testing',
-                    ]);
+                if (array_key_exists('images', $house)) {
+                    foreach ($house['images'] as $image) {
+                        HouseImage::create([
+                            'house_id'  => $createdHouse->id,
+                            'image_url' => $this->uploadImage($image),
+                        ]);
+                    }
                 }
             }
         }

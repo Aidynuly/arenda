@@ -8,7 +8,6 @@ use App\Exceptions\NotVerifiedPhone;
 use App\Exceptions\UserAlreadyExistsException;
 use App\Models\SmsCode;
 use App\Models\User;
-use App\Services\DTO\User\RegisterUserDTO;
 use App\Services\DTO\User\UserDtoInterface;
 use App\Services\Traits\ConstructionHelper;
 
