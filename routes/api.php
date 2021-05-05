@@ -25,7 +25,10 @@ Route::prefix('v1')->group(function() {
         Route::post('offers/statuses/{offer_status}/done', [OfferController::class, 'doneOffer']);
         Route::post('offers/create', [OfferController::class, 'createOffer']);
         Route::post('offers/createOfferStatus', [OfferController::class, 'createOfferStatus']);
+
         Route::get('houses/get', [HouseController::class, 'getMyHouses']);
+        Route::post('houses/add', [HouseController::class, 'addHouse']);
+        Route::post('houses/edit/{house}', [HouseController::class, 'editHouse']);
 
         Route::post('reviews/create', [ReviewController::class, 'createReview']);
         Route::get('profile', [AuthController::class, 'getProfile']);

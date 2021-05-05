@@ -18,7 +18,7 @@ trait ImageUploadTrait
      */
     public function uploadImage(UploadedFile  $image): String
     {
-        $fileName = time().'.'.$image->extension().rand(0, 100).rand(0, 100).rand(0, 100);
+        $fileName = time().'.'.rand(0, 100).rand(0, 100).rand(0, 100).'.'.$image->extension();
         $image->move(public_path('uploads'), $fileName);
 
         return $fileName;
