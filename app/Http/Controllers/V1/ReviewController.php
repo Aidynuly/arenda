@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
  * Class ReviewController
  * @package App\Http\Controllers\V1
  */
-class ReviewController extends Controller
+final class ReviewController extends Controller
 {
     use ResponseTrait;
 

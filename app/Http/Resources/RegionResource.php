@@ -14,7 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @package App\Http\Resources
  * @mixin Region
  */
-class RegionResource extends JsonResource
+final class RegionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

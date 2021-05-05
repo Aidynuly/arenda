@@ -12,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @package App\Http\Resources
  * @mixin House
  */
-class HouseResource extends JsonResource
+final class HouseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

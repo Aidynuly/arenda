@@ -25,7 +25,7 @@ use Illuminate\Http\Request;
  * Class OfferController
  * @package App\Http\Controllers\V1
  */
-class OfferController extends Controller
+final class OfferController extends Controller
 {
     use ResponseTrait;
 

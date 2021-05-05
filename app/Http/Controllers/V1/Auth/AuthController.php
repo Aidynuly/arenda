@@ -29,7 +29,7 @@ use Illuminate\Http\Request;
  * Class AuthController
  * @package App\Http\Controllers\V1\Auth
  */
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     use ResponseTrait, ConstructionHelper;
 

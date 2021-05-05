@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use App\Models\User;
@@ -10,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @package App\Http\Resources
  * @mixin User
  */
-class UserResource extends JsonResource
+final class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

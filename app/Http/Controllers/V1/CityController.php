@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class CityController
  * @package App\Http\Controllers\V1
  */
-class CityController extends Controller
+final class CityController extends Controller
 {
     use ResponseTrait;
 

@@ -14,7 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @package App\Http\Resources
  * @mixin Review
  */
-class ReviewResource extends JsonResource
+final class ReviewResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

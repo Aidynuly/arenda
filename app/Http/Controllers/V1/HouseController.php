@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
  * Class HouseController
  * @package App\Http\Controllers\V1
  */
-class HouseController extends Controller
+final class HouseController extends Controller
 {
     use ResponseTrait;
 
