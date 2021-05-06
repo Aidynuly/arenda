@@ -25,6 +25,8 @@ Route::prefix('v1')->group(function() {
         Route::post('offers/statuses/{offer_status}/done', [OfferController::class, 'doneOffer']);
         Route::post('offers/create', [OfferController::class, 'createOffer']);
         Route::post('offers/createOfferStatus', [OfferController::class, 'createOfferStatus']);
+        Route::get('offers/getSellerOfferStatuses', [OfferController::class, 'getSellerOfferStatuses']);
+        Route::get('offers/getOffersToSellerByUser', [OfferController::class, 'getOffersToSellerByUser']);
 
         Route::get('houses/get', [HouseController::class, 'getMyHouses']);
         Route::post('houses/add', [HouseController::class, 'addHouse']);

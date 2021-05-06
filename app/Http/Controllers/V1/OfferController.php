@@ -8,10 +8,12 @@ use App\Exceptions\AlreadyHasOfferStatusException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOfferRequest;
 use App\Http\Requests\CreateOfferStatusRequest;
+use App\Http\Resources\GetOffersToSellerResource;
 use App\Http\Resources\OfferResource;
 use App\Http\Resources\OfferStatusesSellerResource;
 use App\Models\Offer;
 use App\Models\OfferStatus;
+use App\Models\User;
 use App\Services\DTO\OfferDTO;
 use App\Services\Handlers\Offers\CreateOfferHandler;
 use App\Services\Handlers\Offers\CreateOfferStatusHandler;
@@ -20,6 +22,7 @@ use App\Services\Handlers\Offers\GetOffersByUserHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class OfferController
@@ -130,5 +133,43 @@ final class OfferController extends Controller
     {
         $offerStatus = $handler->handle($request->getDTO());
         return $this->response('Мои отклики', new OfferStatusesSellerResource($offerStatus));
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getSellerOfferStatuses(Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->get('user');
+        $data = OfferStatus::whereUserId($user->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return $this->response('Отклики', OfferStatusesSellerResource::collection($data));
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getOffersToSellerByUser(Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->get('user');
+        $offers = DB::table('offers')
+            ->select('offers.id', 'offers.from_price', 'offers.to_price',
+                'offers.rooms', 'regions.title as region_title',
+                'cities.title as city_title', 'users.name as user_name', 'users.surname as user_surname')
+            ->join('users', 'users.id', '=', 'offers.user_id')
+            ->join('regions', 'offers.region_id', '=', 'regions.id')
+            ->join('cities', 'cities.id', '=', 'regions.city_id')
+            ->leftJoin('offer_statuses', 'offers.id', '=', 'offer_statuses.offer_id')
+            ->whereNull('offer_statuses.offer_id')
+            ->whereIn('offers.region_id', $user->city->regions->pluck('id'))
+            ->get();
+
+        return $this->response('отклики', GetOffersToSellerResource::collection($offers));
     }
 }

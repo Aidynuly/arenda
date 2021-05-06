@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OfferStatus[] $offerStatuses
  * @property-read int|null $offer_statuses_count
  * @property-read \App\Models\Region $region
+ * @property-read \App\Models\User $user
  */
 class Offer extends Model
 {
@@ -57,5 +58,13 @@ class Offer extends Model
     public function offerStatuses(): HasMany
     {
         return $this->hasMany(OfferStatus::class, 'offer_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
