@@ -144,6 +144,7 @@ final class OfferController extends Controller
         /** @var User $user */
         $user = $request->get('user');
         $data = OfferStatus::whereUserId($user->id)
+            ->where('status', '!=', OfferStatus::STATUS_DELETED)
             ->orderBy('created_at', 'DESC')
             ->get();
 
