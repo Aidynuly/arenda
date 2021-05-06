@@ -167,9 +167,40 @@ final class OfferController extends Controller
             ->join('cities', 'cities.id', '=', 'regions.city_id')
             ->leftJoin('offer_statuses', 'offers.id', '=', 'offer_statuses.offer_id')
             ->whereNull('offer_statuses.offer_id')
+            ->orWhere('offer_statuses.user_id', '!=', $user->id)
             ->whereIn('offers.region_id', $user->city->regions->pluck('id'))
+            ->orderByDesc('offers.created_at')
             ->get();
 
+        foreach ($offers as $index => $offer) {
+            $alreadyHasOffer = OfferStatus::whereOfferId($offer->id)
+                ->whereUserId($user->id)
+                ->exists();
+
+            if($alreadyHasOffer) {
+                unset($offers[$index]);
+            }
+        }
+
         return $this->response('отклики', GetOffersToSellerResource::collection($offers));
+    }
+
+    /**
+     * @param Offer $offer
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function declineOfferSeller(Offer $offer, Request $request): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->get('user');
+        //TODO:validate if exists
+        OfferStatus::create([
+            'offer_id' => $offer->id,
+            'user_id' => $user->id,
+            'status' => OfferStatus::STATUS_DELETED,
+        ]);
+
+        return $this->response('Успешно удалена');
     }
 }

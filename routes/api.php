@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function() {
         Route::get('offers/statuses/{offer}', [OfferController::class, 'getOfferStatusesById']);
         Route::post('offers/statuses/{offer_status}/accept', [OfferController::class, 'acceptOffer']);
         Route::post('offers/statuses/{offer_status}/decline', [OfferController::class, 'declineOffer']);
+        Route::post('offers/statuses/{offer}/delete', [OfferController::class, 'declineOffer']);
         Route::post('offers/statuses/{offer_status}/done', [OfferController::class, 'doneOffer']);
         Route::post('offers/create', [OfferController::class, 'createOffer']);
         Route::post('offers/createOfferStatus', [OfferController::class, 'createOfferStatus']);
