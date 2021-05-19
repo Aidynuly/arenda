@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Handlers\ValidateAndSendCode\Change;
+namespace App\Services\Handlers\ValidateAndSendCodeChange;
 
 use App\Services\DTO\ValidateAndSendCodeDTO;
 use App\Services\Handlers\ValidateAndSendCodeChange\Pipes\SendCodeChangePipe;

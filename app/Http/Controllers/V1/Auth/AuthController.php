@@ -19,7 +19,7 @@ use App\Services\Handlers\User\EditProfileHandler;
 use App\Services\Handlers\User\RegisterSellerHandler;
 use App\Services\Handlers\User\RegisterUserHandler;
 use App\Services\Handlers\User\VerifyCodeHandler;
-use App\Services\Handlers\ValidateAndSendCode\Change\ValidateAndSendCodeChangeHandler;
+use App\Services\Handlers\ValidateAndSendCodeChange\ValidateAndSendCodeChangeHandler;
 use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ConstructionHelper;
 use App\Services\Traits\ResponseTrait;
