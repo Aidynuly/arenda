@@ -163,7 +163,7 @@ final class OfferController extends Controller
             ->select('offers.id', 'offers.from_price', 'offers.to_price',
                 'offers.rooms', 'regions.title as region_title',
                 'cities.title as city_title', 'users.name as user_name', 'users.surname as user_surname')
-	    ->distinct('offers.id')
+	        ->distinct('offers.id')
             ->join('users', 'users.id', '=', 'offers.user_id')
             ->join('regions', 'offers.region_id', '=', 'regions.id')
             ->join('cities', 'cities.id', '=', 'regions.city_id')

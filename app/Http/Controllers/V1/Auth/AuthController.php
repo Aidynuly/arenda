@@ -19,6 +19,7 @@ use App\Services\Handlers\User\EditProfileHandler;
 use App\Services\Handlers\User\RegisterSellerHandler;
 use App\Services\Handlers\User\RegisterUserHandler;
 use App\Services\Handlers\User\VerifyCodeHandler;
+use App\Services\Handlers\ValidateAndSendCode\Change\ValidateAndSendCodeChangeHandler;
 use App\Services\Handlers\ValidateAndSendCode\ValidateAndSendCodeHandler;
 use App\Services\Traits\ConstructionHelper;
 use App\Services\Traits\ResponseTrait;
@@ -88,6 +89,19 @@ final class AuthController extends Controller
      * @return JsonResponse
      */
     public function validatePhone(ValidatePhoneRequest $request, ValidateAndSendCodeHandler $handler): JsonResponse
+    {
+        $handler->handle(ValidateAndSendCodeDTO::fromArray([
+            'phone' => $request->get('phone'),
+        ]));
+        return $this->response('Смс отправлено успешно', true);
+    }
+
+    /**
+     * @param ValidatePhoneRequest $request
+     * @param ValidateAndSendCodeChangeHandler $handler
+     * @return JsonResponse
+     */
+    public function validatePhoneChange(ValidatePhoneRequest $request, ValidateAndSendCodeChangeHandler $handler): JsonResponse
     {
         $handler->handle(ValidateAndSendCodeDTO::fromArray([
             'phone' => $request->get('phone'),
