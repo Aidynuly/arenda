@@ -58,4 +58,12 @@ class Offer extends Model
     {
         return $this->hasMany(OfferStatus::class, 'offer_id');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

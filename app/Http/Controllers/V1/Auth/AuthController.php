@@ -56,6 +56,18 @@ final class AuthController extends Controller
         $user = $handler->handle(RegisterSellerDTO::fromArray($request->all()));
         return $this->response('Успешная регистрация', new UserResource($user));
     }
+     
+    /**
+     * @param VerifyCodeRequest $request
+     * @return JsonResponse
+     */
+    public function changePassword(Request $request): JsonResponse
+    {
+        User::wherePhone($this->getNormalPhone($request->get('phone')))->update([
+            'password' => $request->get('password'),
+        ]);
+        return $this->response('Изменено');
+    }   
 
     /**
      * @param AuthRequest $request

@@ -72,4 +72,12 @@ class OfferStatus extends Model
     {
         return $this->belongsTo(House::class, 'house_id');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function offer(): BelongsTo
+    {
+        return $this->belongsTo(Offer::class, 'offer_id');
+    }
 }

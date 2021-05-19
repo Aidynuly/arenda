@@ -14,6 +14,7 @@ Route::prefix('v1')->group(function() {
     Route::post('/register_user', [AuthController::class, 'registerUser']);
     Route::post('/register_seller', [AuthController::class, 'registerSeller']);
     Route::post('/auth', [AuthController::class, 'auth']);
+	 Route::post('/change_password', [AuthController::class, 'changePassword']);    
 
     Route::get('/cities', [CityController::class, 'cities']);
 
@@ -22,9 +23,12 @@ Route::prefix('v1')->group(function() {
         Route::get('offers/statuses/{offer}', [OfferController::class, 'getOfferStatusesById']);
         Route::post('offers/statuses/{offer_status}/accept', [OfferController::class, 'acceptOffer']);
         Route::post('offers/statuses/{offer_status}/decline', [OfferController::class, 'declineOffer']);
+        Route::post('offers/statuses/{offer}/delete', [OfferController::class, 'declineOfferSeller']);
         Route::post('offers/statuses/{offer_status}/done', [OfferController::class, 'doneOffer']);
         Route::post('offers/create', [OfferController::class, 'createOffer']);
         Route::post('offers/createOfferStatus', [OfferController::class, 'createOfferStatus']);
+        Route::get('offers/getSellerOfferStatuses', [OfferController::class, 'getSellerOfferStatuses']);
+        Route::get('offers/getOffersToSellerByUser', [OfferController::class, 'getOffersToSellerByUser']);
 
         Route::get('houses/get', [HouseController::class, 'getMyHouses']);
         Route::post('houses/add', [HouseController::class, 'addHouse']);

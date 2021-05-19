@@ -27,6 +27,7 @@ final class OfferStatusesSellerResource extends JsonResource
             'id'        => $this->id,
             'status'    => $this->status,
             'price'     => $this->price,
+            'user'      => new ShortUserResource($this->offer->user),
             'house'     => new HouseResource($this->house),
         ];
     }

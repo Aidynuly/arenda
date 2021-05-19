@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $user_id
  * @property string $description
  * @property int $rooms
- * @property float $area
+ * @property string $area
  * @property int $region_id
  * @property string $address
  * @property bool $is_active
@@ -59,7 +59,7 @@ class House extends Model
         'id' => 'int',
         'user_id' => 'int',
         'region_id' => 'int',
-        'area' => 'float',
+        'area' => 'string',
         'rooms' => 'int',
         'is_active' => 'boolean',
         'address' => 'string',
