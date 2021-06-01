@@ -182,6 +182,7 @@ final class OfferController extends Controller
             ->select('offers.id', 'offers.from_price', 'offers.to_price',
                 'offers.rooms', 'regions.title as region_title',
                 'cities.title as city_title', 'users.name as user_name', 'users.surname as user_surname')
+	        ->distinct('offers.id')
             ->join('users', 'users.id', '=', 'offers.user_id')
             ->join('regions', 'offers.region_id', '=', 'regions.id')
             ->join('cities', 'cities.id', '=', 'regions.city_id')
@@ -189,7 +190,7 @@ final class OfferController extends Controller
             ->whereNull('offer_statuses.offer_id')
             ->orWhere('offer_statuses.user_id', '!=', $user->id)
             ->whereIn('offers.region_id', $user->city->regions->pluck('id'))
-            ->orderByDesc('offers.created_at')
+            ->orderByDesc('offers.id')
             ->get();
 
         foreach ($offers as $index => $offer) {

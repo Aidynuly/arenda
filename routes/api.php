@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function() {
     //auth
     Route::post('/validate_phone', [AuthController::class, 'validatePhone']);
+    Route::post('/validate_phone_change', [AuthController::class, 'validatePhoneChange']);
     Route::post('/verify_code', [AuthController::class, 'verifyCode']);
     Route::post('/register_user', [AuthController::class, 'registerUser']);
     Route::post('/register_seller', [AuthController::class, 'registerSeller']);
     Route::post('/auth', [AuthController::class, 'auth']);
+	 Route::post('/change_password', [AuthController::class, 'changePassword']);    
 
     Route::get('/cities', [CityController::class, 'cities']);
 
