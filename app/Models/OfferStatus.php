@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
  * @property-read int|null $reviews_count
  * @property-read \App\Models\Offer $offer
+ * @property-read \App\Models\User $user
  */
 class OfferStatus extends Model
 {
@@ -72,6 +73,14 @@ class OfferStatus extends Model
     public function house(): BelongsTo
     {
         return $this->belongsTo(House::class, 'house_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

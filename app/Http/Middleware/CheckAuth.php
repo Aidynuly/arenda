@@ -9,6 +9,7 @@ use App\Exceptions\NotAuthorizedException;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CheckAuth
 {
@@ -27,6 +28,8 @@ class CheckAuth
         }
 
         $user = User::whereToken($token)->first();
+        Log::error($token);
+        Log::error('here');
         if (!$user) {
             throw new InCorrectTokenException('Не правильный токен');
         }

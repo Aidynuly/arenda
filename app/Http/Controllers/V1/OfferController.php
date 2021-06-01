@@ -14,7 +14,9 @@ use App\Http\Resources\OfferStatusesSellerResource;
 use App\Models\Offer;
 use App\Models\OfferStatus;
 use App\Models\User;
+use App\Services\DTO\NotificationDTO;
 use App\Services\DTO\OfferDTO;
+use App\Jobs\SendPushJob;
 use App\Services\Handlers\Offers\CreateOfferHandler;
 use App\Services\Handlers\Offers\CreateOfferStatusHandler;
 use App\Services\Handlers\Offers\GetActiveOfferStatusesHandler;
@@ -90,14 +92,19 @@ final class OfferController extends Controller
             'status' => OfferStatus::STATUS_DECLINED,
         ]);
 
+        SendPushJob::dispatch(NotificationDTO::fromArray([
+            'token' => $offerStatus->user->token,
+            'Отклонено',
+            'Вашу заявку отклонили',
+        ]));
+
         return $this->response('Успешно отклонен');
     }
 
     /**
-     * Принять квартиру user.
-     *
      * @param OfferStatus $offerStatus
      * @return JsonResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function acceptOffer(OfferStatus $offerStatus): JsonResponse
     {
@@ -105,20 +112,31 @@ final class OfferController extends Controller
             'status' => OfferStatus::STATUS_ACCEPTED,
         ]);
 
+        SendPushJob::dispatch(NotificationDTO::fromArray([
+            'token' => $offerStatus->user->token,
+            'Новое предложение',
+            'Вашу заявку приняли',
+        ]));
+
         return $this->response('Успешно принят');
     }
 
     /**
-     * Завершить оффер user.
-     *
      * @param OfferStatus $offerStatus
      * @return JsonResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function doneOffer(OfferStatus $offerStatus): JsonResponse
     {
         $offerStatus->update([
             'status' => OfferStatus::STATUS_DONE,
         ]);
+
+        SendPushJob::dispatch(NotificationDTO::fromArray([
+            'token' => $offerStatus->user->token,
+            'Завершено',
+            'Вашу заявку завершили',
+        ]));
 
         return $this->response('Успешно завершен');
     }
@@ -128,6 +146,7 @@ final class OfferController extends Controller
      * @param CreateOfferStatusHandler $handler
      * @return JsonResponse
      * @throws AlreadyHasOfferStatusException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function createOfferStatus(CreateOfferStatusRequest  $request, CreateOfferStatusHandler $handler): JsonResponse
     {
