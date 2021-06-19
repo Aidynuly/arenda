@@ -48,12 +48,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
  * @property-read int|null $reviews_count
  * @property-read \App\Models\User $user
+ * @property float|null $lat
+ * @property float|null $long
+ * @method static \Illuminate\Database\Eloquent\Builder|House whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|House whereLong($value)
  */
 class House extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['description', 'user_id', 'region_id', 'area', 'rooms', 'is_active', 'address'];
+    protected $fillable = ['description', 'user_id', 'region_id', 'area', 'rooms', 'is_active', 'address', 'lat', 'long'];
 
     protected $casts = [
         'id' => 'int',
@@ -64,6 +68,8 @@ class House extends Model
         'is_active' => 'boolean',
         'address' => 'string',
         'description' => 'string',
+        'lat' => 'double',
+        'long' => 'double',
     ];
 
     /**

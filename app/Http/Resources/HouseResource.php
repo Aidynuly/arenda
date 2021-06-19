@@ -36,7 +36,9 @@ final class HouseResource extends JsonResource
             'area'          => $this->area,
             'address'       => $this->address,
             'region'        => new RegionResource($this->region),
-            'reviews'       => ReviewResource::collection($this->reviews)
+            'reviews'       => ReviewResource::collection($this->reviews),
+            'lat'           => $this->lat,
+            'long'          => $this->long,
         ];
     }
 }

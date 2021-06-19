@@ -67,6 +67,8 @@ class RegisterSellerDTO implements UserDtoInterface
             'password'  => $this->password,
             'phone'     => $this->phone,
             'houses'    => $this->houses,
+            'lat'       => $this->lat,
+            'long'      => $this->long,
         ];
     }
 }

@@ -40,6 +40,8 @@ class RegisterSellerRequest extends FormRequest
             'houses.rooms'          => 'numeric',
             'houses.address'        => 'min:1',
             'houses.description'    => 'min:1',
+            'houses.lat'            => 'min:1',
+            'houses.long'           => 'min:1',
             'houses.images'         => 'array',
             'houses.images.*'       => 'file',
         ];

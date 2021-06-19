@@ -35,6 +35,8 @@ class CreateHousesPipe
                     'area'          => $house['area'],
                     'rooms'         => $house['rooms'],
                     'address'       => $house['address'],
+                    'lat'           => $house['lat'],
+                    'long'          => $house['long'],
                 ]);
                 if (array_key_exists('images', $house)) {
                     foreach ($house['images'] as $image) {
