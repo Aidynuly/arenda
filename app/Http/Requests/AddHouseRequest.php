@@ -41,6 +41,8 @@ final class AddHouseRequest extends FormRequest
             'address'       => 'required',
             'images'        => 'array',
             'images.*'      => 'file',
+            'lat'           => 'required',
+            'long'          => 'required',
         ];
     }
 
@@ -56,6 +58,8 @@ final class AddHouseRequest extends FormRequest
             'area'          => $this->get('area'),
             'rooms'         => $this->get('rooms'),
             'address'       => $this->get('address'),
+            'lat'           => $this->get('lat'),
+            'long'          => $this->get('long'),
             'images'        => $this->allFiles()['images'] ?? [],
         ]);
     }

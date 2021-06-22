@@ -33,6 +33,12 @@ class AddHouseDTO
     /** @var User */
     public $user;
 
+    /** @var string */
+    public $lat;
+
+    /** @var string */
+    public $long;
+
     /**
      * @param array $data
      * @return AddHouseDTO
@@ -47,6 +53,8 @@ class AddHouseDTO
         $self->rooms        = $data['rooms'];
         $self->regionId     = $data['region_id'];
         $self->user         = $data['user'];
+        $self->lat          = $data['lat'];
+        $self->long         = $data['long'];
 
         return $self;
     }
@@ -63,6 +71,8 @@ class AddHouseDTO
             'area'          => $this->area,
             'rooms'         => $this->rooms,
             'region_id'     => $this->regionId,
+            'lat'           => $this->lat,
+            'long'          => $this->long,
         ];
     }
 }
