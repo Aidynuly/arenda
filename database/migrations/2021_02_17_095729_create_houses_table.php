@@ -22,8 +22,8 @@ class CreateHousesTable extends Migration
             $table->unsignedBigInteger('region_id');
             $table->string('address');
             $table->boolean('is_active')->default(true);
-            $table->addColumn('string', 'lat')->nullable();
-            $table->addColumn('string', 'long')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
