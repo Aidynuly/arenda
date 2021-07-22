@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Region[] $regions
  * @property-read int|null $regions_count
+ * @property int $country_id
+ * @method static \Illuminate\Database\Eloquent\Builder|City whereCountryId($value)
  */
 class City extends Model
 {
@@ -26,10 +28,11 @@ class City extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'country_id'];
 
     protected $casts = [
-        'title' => 'string',
+        'title'         => 'string',
+        'country_id'    => 'int',
     ];
 
     /**

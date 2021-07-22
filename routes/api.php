@@ -5,6 +5,7 @@ use App\Http\Controllers\V1\CityController;
 use App\Http\Controllers\V1\OfferController;
 use App\Http\Controllers\V1\HouseController;
 use App\Http\Controllers\V1\ReviewController;
+use App\Http\Controllers\V2\CountryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function() {
@@ -15,7 +16,7 @@ Route::prefix('v1')->group(function() {
     Route::post('/register_user', [AuthController::class, 'registerUser']);
     Route::post('/register_seller', [AuthController::class, 'registerSeller']);
     Route::post('/auth', [AuthController::class, 'auth']);
-	 Route::post('/change_password', [AuthController::class, 'changePassword']);    
+	 Route::post('/change_password', [AuthController::class, 'changePassword']);
 
     Route::get('/cities', [CityController::class, 'cities']);
 
@@ -39,4 +40,8 @@ Route::prefix('v1')->group(function() {
         Route::get('profile', [AuthController::class, 'getProfile']);
         Route::post('profile/edit', [AuthController::class, 'editProfile']);
     });
+});
+
+Route::prefix('v2')->group(function () {
+    Route::get('countries', [CountryController::class, 'getCountries']);
 });
