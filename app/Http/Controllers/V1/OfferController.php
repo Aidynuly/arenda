@@ -102,6 +102,7 @@ final class OfferController extends Controller
     }
 
     /**
+     * Принять квартиру user.
      * @param OfferStatus $offerStatus
      * @return JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException

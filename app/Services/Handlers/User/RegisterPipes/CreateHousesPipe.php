@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Handlers\User\RegisterPipes;
 
+use App\Models\Comfort;
+use App\Models\Comforts;
 use App\Models\House;
 use App\Models\HouseImage;
 use App\Services\DTO\User\RegisterSellerDTO;
@@ -46,9 +48,23 @@ class CreateHousesPipe
                         ]);
                     }
                 }
+                if (array_key_exists('comforts', $house)) {
+                    $this->createComforts($house['comforts'], $createdHouse->id);
+                }
             }
         }
 
         return $next($registerSellerDTO);
+    }
+
+
+    private function createComforts(array $data, int $houseId): void
+    {
+        foreach ($data as $item) {
+            Comforts::create([
+                'house_id' => $houseId,
+                'comfort_types_id' => $item
+            ]);
+        }
     }
 }

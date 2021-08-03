@@ -36,6 +36,7 @@ class RegisterSellerDTO implements UserDtoInterface
     /** @var array */
     public $houses;
 
+
     /**
      * @param array $array
      * @return RegisterSellerDTO
@@ -50,7 +51,6 @@ class RegisterSellerDTO implements UserDtoInterface
         $self->cityId   = $array['city_id'];
         $self->password = $array['password'];
         $self->phone    = $array['phone'];
-
         return $self;
     }
 

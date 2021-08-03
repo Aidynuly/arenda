@@ -44,6 +44,7 @@ class RegisterSellerRequest extends FormRequest
             'houses.long'           => 'min:1',
             'houses.images'         => 'array',
             'houses.images.*'       => 'file',
+            'houses.comforts'       => 'array'
         ];
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76fd1596d1d49c5481dea3f6bcc0aef8",
+    "content-hash": "b34d1c4ca70450f1ed68c9d7703bf802",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -117,6 +117,141 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "cerbero/dto",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cerbero90/dto.git",
+                "reference": "cce88f07a1b995814234265e4a50cdcb37478b46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cerbero90/dto/zipball/cce88f07a1b995814234265e4a50cdcb37478b46",
+                "reference": "cce88f07a1b995814234265e4a50cdcb37478b46",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1||^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=7.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/DtoFlags.php"
+                ],
+                "psr-4": {
+                    "Cerbero\\Dto\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrea Marco Sartori",
+                    "email": "andrea.marco.sartori@gmail.com",
+                    "homepage": "https://github.com/cerbero90",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data Transfer Object (DTO)",
+            "homepage": "https://github.com/cerbero/dto",
+            "keywords": [
+                "Data Transfer Object",
+                "dto"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/AndreaMarcoSartori",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-05-18T03:29:39+00:00"
+        },
+        {
+            "name": "cerbero/laravel-dto",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cerbero90/laravel-dto.git",
+                "reference": "3fb2652e9a22953e587d9845c62144518df4a7dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cerbero90/laravel-dto/zipball/3fb2652e9a22953e587d9845c62144518df4a7dc",
+                "reference": "3fb2652e9a22953e587d9845c62144518df4a7dc",
+                "shasum": ""
+            },
+            "require": {
+                "cerbero/dto": "^2.1",
+                "doctrine/dbal": "^3.0",
+                "illuminate/console": ">=8.0",
+                "illuminate/container": ">=8.0",
+                "illuminate/database": ">=8.0",
+                "illuminate/filesystem": ">=8.0",
+                "illuminate/http": ">=8.0",
+                "illuminate/support": ">=8.0",
+                "php": "^7.3||^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "orchestra/testbench": ">=6.0",
+                "phpunit/phpunit": ">=9.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Cerbero\\LaravelDto\\Providers\\LaravelDtoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cerbero\\LaravelDto\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrea Marco Sartori",
+                    "email": "andrea.marco.sartori@gmail.com",
+                    "homepage": "https://github.com/cerbero90",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data Transfer Object (DTO) for Laravel",
+            "homepage": "https://github.com/cerbero/laravel-dto",
+            "keywords": [
+                "Data Transfer Object",
+                "dto",
+                "laravel"
+            ],
+            "funding": [
+                {
+                    "url": "https://paypal.me/AndreaMarcoSartori",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-05-17T13:19:29+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -5330,16 +5465,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "64a6b902583802c162cdccf7e76dc8619368bf1a"
+                "reference": "73b1012b927633a1b4cd623c2e6b1678e6faef08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/64a6b902583802c162cdccf7e76dc8619368bf1a",
-                "reference": "64a6b902583802c162cdccf7e76dc8619368bf1a",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/73b1012b927633a1b4cd623c2e6b1678e6faef08",
+                "reference": "73b1012b927633a1b4cd623c2e6b1678e6faef08",
                 "shasum": ""
             },
             "require": {
@@ -5350,6 +5485,7 @@
                 "illuminate/console": "^8",
                 "illuminate/filesystem": "^8",
                 "illuminate/support": "^8",
+                "nikic/php-parser": "^4.7",
                 "php": "^7.3 || ^8.0",
                 "phpdocumentor/type-resolver": "^1.1.0"
             },
@@ -5363,6 +5499,9 @@
                 "phpunit/phpunit": "^8.5 || ^9",
                 "spatie/phpunit-snapshot-assertions": "^3 || ^4",
                 "vimeo/psalm": "^3.12"
+            },
+            "suggest": {
+                "illuminate/events": "Required for automatic helper generation (^6|^7|^8)."
             },
             "type": "library",
             "extra": {
@@ -5404,7 +5543,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-ide-helper/issues",
-                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.9.0"
+                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.10.0"
             },
             "funding": [
                 {
@@ -5412,7 +5551,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-29T10:11:05+00:00"
+            "time": "2021-04-09T06:17:55+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",

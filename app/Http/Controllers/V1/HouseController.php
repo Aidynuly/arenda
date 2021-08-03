@@ -13,6 +13,7 @@ use App\Services\Handlers\House\AddHouseHandler;
 use App\Services\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class HouseController
@@ -21,6 +22,7 @@ use Illuminate\Http\Request;
 final class HouseController extends Controller
 {
     use ResponseTrait;
+
 
     /**
      * @param Request $request
@@ -33,6 +35,18 @@ final class HouseController extends Controller
         return $this->response('Мои квартиры', HouseResource::collection($user->houses));
     }
 
+    public function getMyHousesWithComfort(Request $request)
+    {
+        $user = $request->get('user');
+        $data = DB::table('houses')
+            ->join('comforts', 'houses.id', '=', 'comforts.house_id')
+            ->select('houses.*', 'comforts.*')
+            ->get()->toArray();
+
+        return $data;
+    }
+
+
     /**
      * @param AddHouseRequest $request
      * @param AddHouseHandler $handler
@@ -42,6 +56,11 @@ final class HouseController extends Controller
     {
         $handler->handle($request->getDTO());
         return $this->response('Успешно добавлено', true);
+    }
+
+    public function addComfort(Request $request)
+    {
+        return $this->response('Successfully added', 200);
     }
 
     /**

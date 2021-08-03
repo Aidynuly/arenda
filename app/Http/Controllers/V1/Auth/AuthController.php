@@ -57,7 +57,7 @@ final class AuthController extends Controller
         $user = $handler->handle(RegisterSellerDTO::fromArray($request->all()));
         return $this->response('Успешная регистрация', new UserResource($user));
     }
-     
+
     /**
      * @param VerifyCodeRequest $request
      * @return JsonResponse
@@ -68,7 +68,7 @@ final class AuthController extends Controller
             'password' => $request->get('password'),
         ]);
         return $this->response('Изменено');
-    }   
+    }
 
     /**
      * @param AuthRequest $request

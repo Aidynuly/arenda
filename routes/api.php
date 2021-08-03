@@ -16,8 +16,7 @@ Route::prefix('v1')->group(function() {
     Route::post('/register_user', [AuthController::class, 'registerUser']);
     Route::post('/register_seller', [AuthController::class, 'registerSeller']);
     Route::post('/auth', [AuthController::class, 'auth']);
-	 Route::post('/change_password', [AuthController::class, 'changePassword']);
-
+    Route::post('/change_password', [AuthController::class, 'changePassword']);
     Route::get('/cities', [CityController::class, 'cities']);
 
     Route::middleware(['check.auth'])->group(function() {
@@ -31,8 +30,10 @@ Route::prefix('v1')->group(function() {
         Route::post('offers/createOfferStatus', [OfferController::class, 'createOfferStatus']);
         Route::get('offers/getSellerOfferStatuses', [OfferController::class, 'getSellerOfferStatuses']);
         Route::get('offers/getOffersToSellerByUser', [OfferController::class, 'getOffersToSellerByUser']);
+        Route::get('offers/getAll', [OfferController::class, 'getAll']);
 
         Route::get('houses/get', [HouseController::class, 'getMyHouses']);
+        Route::get('houses/get/comforts', [HouseController::class, 'getMyHousesWithComfort']);
         Route::post('houses/add', [HouseController::class, 'addHouse']);
         Route::post('houses/edit/{house}', [HouseController::class, 'editHouse']);
 
